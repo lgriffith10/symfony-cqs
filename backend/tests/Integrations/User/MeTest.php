@@ -5,8 +5,6 @@ namespace App\Tests\Integrations\User;
 use App\Repository\UserRepository;
 use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\Me\MeQuery;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MeTest extends BaseIntegrationTest
