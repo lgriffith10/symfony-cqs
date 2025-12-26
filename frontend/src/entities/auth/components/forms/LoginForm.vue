@@ -14,17 +14,6 @@
         </Field>
 
         <Field>
-          <FieldLabel for="password">Confirm password</FieldLabel>
-          <Input
-            v-model="confirmPassword"
-            v-bind="confirmPasswordAttrs"
-            type="password"
-            placeholder="password"
-          />
-          <FieldError :errors="[errors.confirmPassword]" />
-        </Field>
-
-        <Field>
           <Button type="submit" variant="default">Sign up</Button>
         </Field>
       </FieldGroup>
@@ -45,16 +34,10 @@ import { toast } from 'vue-sonner'
 const { mutateAsync } = useRegisterMutation()
 
 const validationSchema = toTypedSchema(
-  z
-    .object({
-      email: z.email(),
-      password: z.string().min(6, 'Must be at least 6 characters'),
-      confirmPassword: z.string(),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: 'Passwords should have same value',
-      path: ['confirmPassword'],
-    }),
+  z.object({
+    email: z.email(),
+    password: z.string().min(6, 'Must be at least 6 characters'),
+  }),
 )
 
 const { errors, defineField, handleSubmit } = useForm({
@@ -62,25 +45,20 @@ const { errors, defineField, handleSubmit } = useForm({
   initialValues: {
     email: '',
     password: '',
-    confirmPassword: '',
   },
 })
 
 const [email, emailAttrs] = defineField('email')
 const [password, passwordAttrs] = defineField('password')
-const [confirmPassword, confirmPasswordAttrs] = defineField('confirmPassword')
 
-const onSubmit = handleSubmit(async ({ email, password }) => {
-  await mutateAsync(
-    { email, password },
-    {
-      onError: (error: any) => {
-        toast.error(String(error))
-      },
-      onSuccess: () => {
-        toast.success('You were successfully registered. Please login.')
-      },
+const onSubmit = handleSubmit(async (values) => {
+  await mutateAsync(values, {
+    onError: (error: any) => {
+      toast.error(String(error))
     },
-  )
+    onSuccess: () => {
+      toast.success('You were successfully registered. Please login.')
+    },
+  })
 })
 </script>

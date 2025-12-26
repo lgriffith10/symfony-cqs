@@ -4,7 +4,16 @@ export const routes: RouteRecordRaw[] = [
   {
     name: 'Register',
     path: '/register',
-    component: import('@/views/auth/RegisterView.vue'),
+    component: () => import('@/views/auth/RegisterView.vue'),
+    meta: {
+      isPublic: true,
+      layout: 'AuthLayout',
+    },
+  },
+  {
+    name: 'Login',
+    path: '/login',
+    component: () => import('@/views/auth/LoginView.vue'),
     meta: {
       isPublic: true,
       layout: 'AuthLayout',
@@ -13,6 +22,6 @@ export const routes: RouteRecordRaw[] = [
   {
     name: 'Home',
     path: '/',
-    component: import('@/views/HomeView.vue'),
+    component: () => import('@/views/HomeView.vue'),
   },
 ]
