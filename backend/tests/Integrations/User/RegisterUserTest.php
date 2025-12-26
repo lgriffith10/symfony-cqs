@@ -22,7 +22,7 @@ class RegisterUserTest extends BaseIntegrationTest
 
     public function testRegisterUser_ShouldSucceed(): void {
         // Arrange
-        $command = new RegisterUserCommand(email: 'test@test.com', password: 'password');
+        $command = new RegisterUserCommand(email: 'integration@test.com', password: 'password');
 
         // Act
         $result = $this->dispatchCommand($command);
@@ -39,14 +39,6 @@ class RegisterUserTest extends BaseIntegrationTest
 
     public function testRegisterUser_WithAlreadyTakenEmail_ShouldFail(): void {
         // Arrange
-        $user = new User();
-        $user->setId(Uuid::v7());
-        $user->setEmail('test@test.com');
-        $user->setPassword('password');
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
         $command = new RegisterUserCommand(email: 'test@test.com', password: 'password');
 
         // Assert
