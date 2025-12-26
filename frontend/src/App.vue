@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { Button } from 'primevue'
+import { useLayout } from '@/entities/common/composables/useLayout.ts'
+
+const { layout } = useLayout()
 </script>
 
 <template>
-  <Button label="Test" />
+  <div class="flex h-screen w-full">
+    <component :is="layout">
+      <RouterView />
+    </component>
+  </div>
 </template>
 
 <style scoped></style>

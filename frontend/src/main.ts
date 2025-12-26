@@ -6,7 +6,8 @@ import Aura from '@primeuix/themes/aura'
 import '@/assets/index.css'
 
 import App from './App.vue'
-import router from './router'
+import router from './plugins/router'
+import AuthLayout from '@/plugins/router/AuthLayout.vue'
 
 const app = createApp(App)
 
@@ -17,5 +18,7 @@ app.use(PrimeVue, {
     preset: Aura,
   },
 })
+
+app.component('AuthLayout', AuthLayout)
 
 app.mount('#app')
