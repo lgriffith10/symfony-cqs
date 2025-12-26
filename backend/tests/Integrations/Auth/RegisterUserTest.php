@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Integrations\User;
+namespace App\Tests\Integrations\Auth;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\RegisterUser\RegisterUserCommand;

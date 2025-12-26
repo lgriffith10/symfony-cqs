@@ -12,3 +12,8 @@ controllers:
 
 api_login_check:
     path: /api/login_check
+    methods: [POST]
+
+api_token_invalidate:
+    path: /api/logout
+    methods: [GET, POST]

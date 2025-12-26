@@ -3,7 +3,6 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
     providers:
-        # Si tu utilises une entité User classique
         app_user_provider:
             entity:
                 class: App\Entity\User
@@ -14,7 +13,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        # 1. Le firewall pour la connexion (récupérer le token)
         login:
             pattern: ^/api/login
             stateless: true
@@ -23,11 +21,14 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-        # 2. Le firewall principal pour sécuriser tes routes API
         api:
             pattern: ^/api
             stateless: true
             jwt: ~
+
+            logout:
+                path: api_token_invalidate
+                delete_cookies: [ BEARER ]
 
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }

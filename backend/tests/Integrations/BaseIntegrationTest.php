@@ -2,6 +2,7 @@
 
 namespace App\Tests\Integrations;
 
+use App\Repository\UserRepository;
 use App\UseCases\CommandBus;
 use App\UseCases\QueryBus;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Uid\Uuid;
 
 class BaseIntegrationTest extends KernelTestCase
 {
@@ -36,6 +39,13 @@ class BaseIntegrationTest extends KernelTestCase
     protected function getService(string $serviceId): object
     {
         return $this->container->get($serviceId);
+    }
+
+    protected function as(Uuid $id): void {
+        $user = $this->container->get(UserRepository::class)->findOneBy(['id' => $id]);
+
+        $token = new UsernamePasswordToken($user, 'api', $user->getRoles());
+        $this->container->get('security.token_storage')->setToken($token);
     }
 
     protected function dispatchCommand(object $command): mixed

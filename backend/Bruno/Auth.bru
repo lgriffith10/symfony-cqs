@@ -4,12 +4,20 @@ meta {
   seq: 1
 }
 
-get {
-  url: 
-  body: none
-  auth: inherit
+post {
+  url: {{BASE_URL}}/api/login_check
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "luciano@griffith.com",
+    "password": "test123"
+  }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

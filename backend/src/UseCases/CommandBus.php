@@ -2,6 +2,7 @@
 
 namespace App\UseCases;
 
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -15,8 +16,17 @@ class CommandBus
     {
     }
 
-    public function execute($command): mixed
+    public function execute($command): \Throwable
     {
-        return $this->handle($command);
+        try {
+            return $this->handle($command);
+        } catch (HandlerFailedException $e) {
+            $currentException = $e;
+            while ($currentException instanceof HandlerFailedException) {
+                $currentException = $currentException->getPrevious();
+            }
+
+            throw $currentException ?? $e;
+        }
     }
 }
