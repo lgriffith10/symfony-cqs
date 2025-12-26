@@ -1,0 +1,10 @@
+# docker-compose.test.yml
+services:
+  database_test:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: app_test
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+    ports:
+      - "5433:5432" # On utilise un port différent de la dev (5432)

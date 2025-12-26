@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    public: true
+
+  # On cible tout le dossier src/
+  App\UseCases\CommandBus:
+    public: true
+    autowire: true
+
+  App\UseCases\QueryBus:
+    public: true
+    autowire: true
