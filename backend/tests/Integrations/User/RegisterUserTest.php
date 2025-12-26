@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\RegisterUser\RegisterUserCommand;
-use Symfony\Component\Uid\Uuid;
 
 class RegisterUserTest extends BaseIntegrationTest
 {
