@@ -26,7 +26,6 @@ export default defineConfigWithVueTs(
     files: ['src/**/__tests__/*'],
   },
   {
-    files: ['**/*.test.ts'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
     },

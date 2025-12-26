@@ -16,7 +16,7 @@ class QueryBus
     {
     }
 
-    public function query($query): \Throwable {
+    public function query($query): mixed {
         try {
             return $this->handle($query);
         } catch (HandlerFailedException $e) {

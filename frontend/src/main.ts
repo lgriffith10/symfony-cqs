@@ -1,23 +1,15 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import PrimeVue from 'primevue/config'
-import Aura from '@primeuix/themes/aura'
-
 import '@/assets/index.css'
-
+import 'vue-sonner/style.css'
 import App from './App.vue'
 import router from './plugins/router'
 import AuthLayout from '@/plugins/router/AuthLayout.vue'
+import { VueQueryPlugin } from '@tanstack/vue-query'
 
 const app = createApp(App)
 
-app.use(createPinia())
-app.use(router)
-app.use(PrimeVue, {
-  theme: {
-    preset: Aura,
-  },
-})
+app.use(createPinia()).use(router).use(VueQueryPlugin)
 
 app.component('AuthLayout', AuthLayout)
 

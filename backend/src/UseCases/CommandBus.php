@@ -16,7 +16,7 @@ class CommandBus
     {
     }
 
-    public function execute($command): \Throwable
+    public function execute($command): mixed
     {
         try {
             return $this->handle($command);
