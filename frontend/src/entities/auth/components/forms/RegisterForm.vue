@@ -71,16 +71,14 @@ const [password, passwordAttrs] = defineField('password')
 const [confirmPassword, confirmPasswordAttrs] = defineField('confirmPassword')
 
 const onSubmit = handleSubmit(async ({ email, password }) => {
-  await mutateAsync(
-    { email, password },
-    {
-      onError: (error: any) => {
-        toast.error(String(error))
-      },
-      onSuccess: () => {
-        toast.success('You were successfully registered. Please login.')
-      },
-    },
-  )
+  try {
+    await mutateAsync({
+      email,
+      password,
+    })
+    toast.success('You were successfully registered. Please login.')
+  } catch (error: any) {
+    toast.error(error.message)
+  }
 })
 </script>

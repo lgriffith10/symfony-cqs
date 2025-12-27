@@ -2,9 +2,11 @@
 
 namespace App\UseCases;
 
+use App\Dtos\ApiResponse;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class QueryBus
 {
@@ -16,16 +18,13 @@ class QueryBus
     {
     }
 
+    /**
+     * @template T
+     * @param object $query
+     * @return ApiResponse<T>
+     */
     public function query($query): mixed {
-        try {
-            return $this->handle($query);
-        } catch (HandlerFailedException $e) {
-            $currentException = $e;
-            while ($currentException instanceof HandlerFailedException) {
-                $currentException = $currentException->getPrevious();
-            }
-
-            throw $currentException ?? $e;
-        }
+        $envelope = $this->messageBus->dispatch($query);
+        return $envelope->last(HandledStamp::class)->getResult();
     }
 }

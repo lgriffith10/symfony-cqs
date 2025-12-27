@@ -43,7 +43,6 @@ class RegisterUserTest extends BaseIntegrationTest
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Email already in use.');
 
-
         // Act
         $this->dispatchCommand($command);
     }

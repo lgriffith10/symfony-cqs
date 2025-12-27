@@ -4,6 +4,7 @@ import {
   type RegisterUserResponse,
   RegisterUserResponseSchema,
 } from '@/entities/auth/types/registerUser.ts'
+import type { LoginRequest } from '@/entities/auth/types/login.ts'
 
 export async function registerUser(
   request: RegisterUserRequest,
@@ -13,5 +14,13 @@ export async function registerUser(
     return RegisterUserResponseSchema.parse(data)
   } catch (e: any) {
     throw new Error(e.response?.data?.detail)
+  }
+}
+
+export async function login(request: LoginRequest): Promise<void> {
+  try {
+    await api.post('/api/login_check', request)
+  } catch (e: any) {
+    throw new Error(e.response?.data?.message)
   }
 }

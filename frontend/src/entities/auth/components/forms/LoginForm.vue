@@ -28,10 +28,10 @@ import { useForm } from 'vee-validate'
 import { Field, FieldError, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useRegisterMutation } from '@/entities/auth/composables'
+import { useLoginMutation } from '@/entities/auth/composables'
 import { toast } from 'vue-sonner'
 
-const { mutateAsync } = useRegisterMutation()
+const { mutateAsync } = useLoginMutation()
 
 const validationSchema = toTypedSchema(
   z.object({
@@ -51,14 +51,15 @@ const { errors, defineField, handleSubmit } = useForm({
 const [email, emailAttrs] = defineField('email')
 const [password, passwordAttrs] = defineField('password')
 
-const onSubmit = handleSubmit(async (values) => {
-  await mutateAsync(values, {
-    onError: (error: any) => {
-      toast.error(String(error))
-    },
-    onSuccess: () => {
-      toast.success('You were successfully registered. Please login.')
-    },
-  })
+const onSubmit = handleSubmit(async ({ email, password }) => {
+  try {
+    await mutateAsync({
+      username: email,
+      password,
+    })
+    toast.success('You were successfully logged in.')
+  } catch (error: any) {
+    toast.error(error.message)
+  }
 })
 </script>

@@ -15,14 +15,12 @@ class UserController extends AbstractController
 {
     function __construct(private readonly QueryBus $queryBus)
     {
-
     }
 
     #[Route('/me', name: 'app_me', methods: ['GET'])]
     public function index(): Response
     {
         $response = $this->queryBus->query(new MeQuery());
-
-        return $this->json($response, Response::HTTP_OK);
+        return $this->json($response, $response->statusCode);
     }
 }

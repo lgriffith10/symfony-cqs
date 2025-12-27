@@ -2,6 +2,7 @@
 
 namespace App\UseCases\User\RegisterUser;
 
+use App\Dtos\ApiResponse;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -20,7 +21,10 @@ final class RegisterUserHandler
     {
     }
 
-    public function __invoke(RegisterUserCommand $command): RegisterUserResponse
+    /**
+     * @return ApiResponse<RegisterUserResponse>
+     */
+    public function __invoke(RegisterUserCommand $command): ApiResponse
     {
         $user = $this->security->getUser();
 
@@ -28,7 +32,7 @@ final class RegisterUserHandler
 
 
         if ($existingUser != 0) {
-            throw new \Exception("Email already in use.");
+            return ApiResponse::error('User already exists.');
         }
 
         $user = new User();
@@ -40,8 +44,6 @@ final class RegisterUserHandler
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        return new RegisterUserResponse(
-            id: $user->getId()
-        );
+        return ApiResponse::created(new RegisterUserResponse($user->getId()));
     }
 }
