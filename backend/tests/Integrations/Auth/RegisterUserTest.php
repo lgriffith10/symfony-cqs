@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Integrations\Auth;
 
+use App\Dtos\ApiResponse;
 use App\Repository\UserRepository;
 use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\RegisterUser\RegisterUserCommand;
@@ -23,27 +24,31 @@ class RegisterUserTest extends BaseIntegrationTest
         $command = new RegisterUserCommand(email: 'integration@test.com', password: 'password');
 
         // Act
+        /* @var ApiResponse<RegisterUserCommand> $result */
         $result = $this->dispatchCommand($command);
 
         // Assert;
-        $this->assertNotNull($result->id);
+        $this->assertTrue($result->success);
 
         $user = $this->userRepository->findOneBy(['email' => $command->email]);
 
         $this->assertNotNull($user);
         $this->assertEquals($command->email, $user->getEmail());
-        $this->assertEquals($result->id, $user->getId());
+        $this->assertEquals($result->data->id, $user->getId());
     }
 
     public function testRegisterUser_WithAlreadyTakenEmail_ShouldFail(): void {
         // Arrange
         $command = new RegisterUserCommand(email: 'test@test.com', password: 'password');
 
-        // Assert
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Email already in use.');
-
         // Act
-        $this->dispatchCommand($command);
+        /* @var ApiResponse<RegisterUserCommand> $result */
+        $result = $this->dispatchCommand($command);
+
+        // Assert
+        $this->assertFalse($result->success);
+        $this->assertNotNull($result->error);
+
+        $this->assertEquals('User already exists.', $result->error["message"]);
     }
 }

@@ -9,13 +9,13 @@ class ApiResponse
 {
     /**
      * @param T|null $data
-     * @param array<string, string> $errors
+     * @param array<string, string> $error
      */
     public function __construct(
         public readonly mixed $data = null,
-        public readonly array $errors = [],
-        public readonly bool $success = true,
-        public readonly int $statusCode = 200
+        public readonly array $error = [],
+        public readonly bool  $success = true,
+        public readonly int   $statusCode = 200
     )
     {
     }
@@ -45,13 +45,17 @@ class ApiResponse
      * @return self<null>
      */
     public static function unauthorized(string $message, int $code = 400): self {
-        return new self(errors: ['message' => 'Unauthorized'], success: false, statusCode: 403);
+        return new self(error: ['message' => 'Unauthorized'], success: false, statusCode: 403);
     }
 
     /**
      * @return self<null>
      */
     public static function error(string $message, int $code = 400): self {
-        return new self(errors: ['message' => $message], success: false, statusCode: $code);
+        return new self(
+            error: ['message' => $message],
+            success: false,
+            statusCode: $code
+        );
     }
 }
