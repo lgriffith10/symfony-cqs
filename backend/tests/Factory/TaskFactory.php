@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Test\Factory;
+namespace App\Tests\Factory;
 
 use App\Entity\Task;
 use App\Enum\TaskState;
+use Symfony\Component\Uid\Uuid;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
@@ -36,7 +37,7 @@ final class TaskFactory extends PersistentObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'Id' => self::faker()->uuid(),
+            'Id' => Uuid::v7(),
             'Description' => self::faker()->text(255),
             'ExpectedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'Name' => self::faker()->text(255),

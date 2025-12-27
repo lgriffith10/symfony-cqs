@@ -23,8 +23,8 @@ final readonly class TaskAuthorizationChecker
         $result = $qb->select('t')
             ->from(Task::class, 't')
             ->where('t.id = :taskId')
-            ->where('t.createdBy = :userId')
             ->setParameter('taskId', $taskId)
+            ->andWhere('t.createdBy = :userId')
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getOneOrNullResult();

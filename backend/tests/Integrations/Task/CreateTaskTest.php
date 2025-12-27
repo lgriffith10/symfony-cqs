@@ -3,7 +3,6 @@
 namespace App\Integrations\Task;
 
 use App\Dtos\ApiResponse;
-use App\Entity\Task;
 use App\Entity\User;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
@@ -21,7 +20,6 @@ class CreateTaskTest extends BaseIntegrationTest
 
         $userRepository = $this->getService(UserRepository::class);
         $this->user = $userRepository->findOneBy(['email' => 'test@test.com']);
-
     }
 
     public function testShouldSucceed(): void
