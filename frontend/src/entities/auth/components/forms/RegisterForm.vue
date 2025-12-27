@@ -4,13 +4,25 @@
       <FieldGroup>
         <Field>
           <FieldLabel for="email">Email</FieldLabel>
-          <Input v-model="email" v-bind="emailAttrs" type="text" placeholder="john@doe.com" />
-          <FieldError :errors="[errors.email]" />
+          <Input
+            v-model="email"
+            v-bind="emailAttrs"
+            type="email"
+            placeholder="john@doe.com"
+            data-test="email-input"
+          />
+          <FieldError :errors="[errors.email]" data-test="email-errors" />
         </Field>
         <Field>
           <FieldLabel for="password">Password</FieldLabel>
-          <Input v-model="password" v-bind="passwordAttrs" type="password" placeholder="password" />
-          <FieldError :errors="[errors.password]" />
+          <Input
+            v-model="password"
+            v-bind="passwordAttrs"
+            type="password"
+            placeholder="password"
+            data-test="password-input"
+          />
+          <FieldError :errors="[errors.password]" data-test="password-errors" />
         </Field>
 
         <Field>
@@ -20,8 +32,9 @@
             v-bind="confirmPasswordAttrs"
             type="password"
             placeholder="password"
+            data-test="confirm-password-input"
           />
-          <FieldError :errors="[errors.confirmPassword]" />
+          <FieldError :errors="[errors.confirmPassword]" data-test="confirm-password-errors" />
         </Field>
 
         <Field>

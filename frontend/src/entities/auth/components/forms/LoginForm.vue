@@ -4,7 +4,13 @@
       <FieldGroup>
         <Field>
           <FieldLabel for="email">Email</FieldLabel>
-          <Input v-model="email" v-bind="emailAttrs" type="text" placeholder="john@doe.com" />
+          <Input
+            v-model="email"
+            v-bind="emailAttrs"
+            type="email"
+            placeholder="john@doe.com"
+            data-test="email-input"
+          />
           <FieldError :errors="[errors.email]" />
         </Field>
         <Field>
