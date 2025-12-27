@@ -1,2 +1,0 @@
-src/lib/crc32.lo: \
-  /Users/luciano/Documents/projects/task-manager/backend/xdebug-3.5.0/src/lib/crc32.c

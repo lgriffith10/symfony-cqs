@@ -1,4 +1,0 @@
-src/lib/hash.lo: \
-  /Users/luciano/Documents/projects/task-manager/backend/xdebug-3.5.0/src/lib/hash.c \
-  /Users/luciano/Documents/projects/task-manager/backend/xdebug-3.5.0/src/lib/hash.h \
-  /Users/luciano/Documents/projects/task-manager/backend/xdebug-3.5.0/src/lib/llist.h
