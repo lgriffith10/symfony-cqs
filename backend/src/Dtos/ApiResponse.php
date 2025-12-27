@@ -3,6 +3,7 @@
 namespace App\Dtos;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Attribute\Ignore;
 
 /**
  * @template T
@@ -39,6 +40,9 @@ class ApiResponse
         return new self(data: $data, statusCode: Response::HTTP_CREATED);
     }
 
+    /**
+     * @return self<null>
+     */
     public static function noContent(): self {
         return new self(data: null, statusCode: Response::HTTP_NO_CONTENT);
     }

@@ -7,7 +7,6 @@ use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\Me\MeQuery;
 use App\Dtos\ApiResponse;
 use App\UseCases\User\Me\MeResponse;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MeTest extends BaseIntegrationTest
 {
