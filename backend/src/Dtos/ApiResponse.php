@@ -2,6 +2,8 @@
 
 namespace App\Dtos;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * @template T
  */
@@ -34,24 +36,35 @@ class ApiResponse
      * @param TSuccess $data
      */
     public static function created(mixed $data): self {
-        return new self(data: $data, statusCode: 201);
+        return new self(data: $data, statusCode: Response::HTTP_CREATED);
     }
 
     public static function noContent(): self {
-        return new self(data: null, statusCode: 204);
+        return new self(data: null, statusCode: Response::HTTP_NO_CONTENT);
     }
 
     /**
      * @return self<null>
      */
-    public static function unauthorized(string $message, int $code = 400): self {
-        return new self(error: ['message' => 'Unauthorized'], success: false, statusCode: 403);
+    public static function notFound(string $message): self {
+        return new self(
+            error: ['message' => $message],
+            success: false,
+            statusCode: Response::HTTP_NOT_FOUND
+        );
     }
 
     /**
      * @return self<null>
      */
-    public static function error(string $message, int $code = 400): self {
+    public static function forbidden(): self {
+        return new self(error: ['message' => 'Forbidden'], success: false, statusCode: Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * @return self<null>
+     */
+    public static function error(string $message, int $code = Response::HTTP_BAD_REQUEST): self {
         return new self(
             error: ['message' => $message],
             success: false,
