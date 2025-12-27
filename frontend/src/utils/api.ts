@@ -8,11 +8,9 @@ export const api = axios.create({
 
 api.interceptors.response.use(
   function onFulfilled(response: AxiosResponse<ApiResponse<Record<string, any>>>) {
-    console.log({ response })
     return response
   },
   function onRejected(error: AxiosError<ApiResponse<Record<string, any>>>) {
-    console.log({ error })
-    return Promise.reject(error.response)
+    return Promise.reject(error.response?.data.error)
   },
 )

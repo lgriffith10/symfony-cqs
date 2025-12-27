@@ -21,6 +21,6 @@ export async function login(request: LoginRequest): Promise<void> {
   try {
     await api.post('/api/login_check', request)
   } catch (e: any) {
-    throw new Error(e.response?.data?.message)
+    throw new Error(e.message)
   }
 }

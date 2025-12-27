@@ -13,12 +13,11 @@ use Symfony\Component\Uid\Uuid;
 #[AsMessageHandler]
 final class RegisterUserHandler
 {
-    function __construct(
+    public function __construct(
         private EntityManagerInterface $entityManager,
         private UserPasswordHasherInterface $passwordHasher,
         private Security $security,
-    )
-    {
+    ) {
     }
 
     /**
@@ -30,8 +29,7 @@ final class RegisterUserHandler
 
         $existingUser = $this->entityManager->getRepository(User::class)->count(['email' => $command->email]);
 
-
-        if ($existingUser != 0) {
+        if (0 != $existingUser) {
             return ApiResponse::error('User already exists.');
         }
 

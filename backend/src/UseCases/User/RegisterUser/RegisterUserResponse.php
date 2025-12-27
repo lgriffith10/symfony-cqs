@@ -4,12 +4,10 @@ namespace App\UseCases\User\RegisterUser;
 
 use Symfony\Component\Uid\Uuid;
 
-readonly final class RegisterUserResponse
+final readonly class RegisterUserResponse
 {
-    function __construct(
+    public function __construct(
         public Uuid $id
-    )
-    {
-
+    ) {
     }
 }

@@ -4,5 +4,7 @@ namespace App\UseCases\User\Me;
 
 class MeQuery
 {
-    function __construct() {}
+    public function __construct()
+    {
+    }
 }

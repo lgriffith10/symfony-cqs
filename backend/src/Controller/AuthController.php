@@ -14,16 +14,17 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api')]
 final class AuthController extends AbstractController
 {
-    function __construct(
+    public function __construct(
         private readonly CommandBus $commandBus,
-    )
-    {
+    ) {
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(#[MapRequestPayload] RegisterUserCommand $command): Response {
+    public function register(#[MapRequestPayload] RegisterUserCommand $command): Response
+    {
         /* @var ApiResponse<RegisterUserCommand> $response */
         $response = $this->commandBus->execute($command);
+
         return new JsonResponse($response, $response->statusCode);
     }
 }

@@ -21,7 +21,7 @@ class UserFixtures extends Fixture
                 'id' => Uuid::v7(),
                 'email' => 'luciano@griffith.com',
                 'password' => 'test123',
-                'roles' => ['ROLE_ADMIN']
+                'roles' => ['ROLE_ADMIN'],
             ],
             [
                 'id' => Uuid::v7(),

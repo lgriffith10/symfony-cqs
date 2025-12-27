@@ -12,7 +12,7 @@ class Kernel extends BaseKernel
 
     public function process(ContainerBuilder $container): void
     {
-        if ($this->environment === 'test') {
+        if ('test' === $this->environment) {
             foreach ($container->getDefinitions() as $definition) {
                 $definition->setPublic(true);
             }

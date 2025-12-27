@@ -2,24 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Integrations\Auth;
+namespace Integrations\Auth;
 
 use App\Dtos\ApiResponse;
 use App\Repository\UserRepository;
-use App\Tests\Integrations\BaseIntegrationTest;
+use Integrations\BaseIntegrationTest;
 use App\UseCases\User\RegisterUser\RegisterUserCommand;
 
 class RegisterUserTest extends BaseIntegrationTest
 {
     protected UserRepository $userRepository;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         parent::setUp();
 
         $this->userRepository = $this->getService(UserRepository::class);
     }
 
-    public function testRegisterUser_ShouldSucceed(): void {
+    public function testRegisterUserShouldSucceed(): void
+    {
         // Arrange
         $command = new RegisterUserCommand(email: 'integration@test.com', password: 'password');
 
@@ -37,7 +39,8 @@ class RegisterUserTest extends BaseIntegrationTest
         $this->assertEquals($result->data->id, $user->getId());
     }
 
-    public function testRegisterUser_WithAlreadyTakenEmail_ShouldFail(): void {
+    public function testRegisterUserWithAlreadyTakenEmailShouldFail(): void
+    {
         // Arrange
         $command = new RegisterUserCommand(email: 'test@test.com', password: 'password');
 
@@ -49,6 +52,6 @@ class RegisterUserTest extends BaseIntegrationTest
         $this->assertFalse($result->success);
         $this->assertNotNull($result->error);
 
-        $this->assertEquals('User already exists.', $result->error["message"]);
+        $this->assertEquals('User already exists.', $result->error['message']);
     }
 }

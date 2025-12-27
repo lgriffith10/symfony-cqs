@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Tests\Integrations;
+namespace Integrations;
 
 use App\Repository\UserRepository;
 use App\UseCases\CommandBus;
 use App\UseCases\QueryBus;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use Psr\Container\ContainerInterface;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Uid\Uuid;
 
-class BaseIntegrationTest extends KernelTestCase
+#[DoesNotPerformAssertions]
+abstract class BaseIntegrationTest extends KernelTestCase
 {
     protected ContainerInterface $container;
     protected EntityManagerInterface $entityManager;
@@ -26,7 +25,8 @@ class BaseIntegrationTest extends KernelTestCase
         return \App\Kernel::class;
     }
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         parent::setUp();
         self::bootKernel();
 
@@ -41,7 +41,8 @@ class BaseIntegrationTest extends KernelTestCase
         return $this->container->get($serviceId);
     }
 
-    protected function as(Uuid $id): void {
+    protected function as(Uuid $id): void
+    {
         $user = $this->container->get(UserRepository::class)->findOneBy(['id' => $id]);
 
         $token = new UsernamePasswordToken($user, 'api', $user->getRoles());

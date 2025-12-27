@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/api')]
-class UserController extends AbstractController
+final class UserController extends AbstractController
 {
-    function __construct(private readonly QueryBus $queryBus)
+    public function __construct(private readonly QueryBus $queryBus)
     {
     }
 
@@ -22,6 +22,7 @@ class UserController extends AbstractController
     public function index(): Response
     {
         $response = $this->queryBus->query(new MeQuery());
+
         return new JsonResponse($response, $response->statusCode);
     }
 }

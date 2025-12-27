@@ -1,24 +1,26 @@
 <?php
 
-namespace App\Tests\Integrations\User;
+namespace Integrations\User;
 
-use App\Repository\UserRepository;
-use App\Tests\Integrations\BaseIntegrationTest;
-use App\UseCases\User\Me\MeQuery;
 use App\Dtos\ApiResponse;
+use App\Repository\UserRepository;
+use Integrations\BaseIntegrationTest;
+use App\UseCases\User\Me\MeQuery;
 use App\UseCases\User\Me\MeResponse;
 
 class MeTest extends BaseIntegrationTest
 {
     private readonly UserRepository $userRepository;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         parent::setUp();
 
         $this->userRepository = $this->getService(UserRepository::class);
     }
 
-    public function testMe_ShouldSucceed(): void {
+    public function testMeShouldSucceed(): void
+    {
         // Arrange
         $query = new MeQuery();
 
@@ -34,7 +36,8 @@ class MeTest extends BaseIntegrationTest
         $this->assertEquals($result->data->email, $user->getEmail());
     }
 
-    public function testMe_WithoutUser_ShouldFail(): void {
+    public function testMeWithoutUserShouldFail(): void
+    {
         // Arrange
         $query = new MeQuery();
 
@@ -45,6 +48,6 @@ class MeTest extends BaseIntegrationTest
         // Assert
         $this->assertFalse($result->success);
         $this->assertEquals(404, $result->statusCode);
-        $this->assertEquals("Current user not found.", $result->error["message"]);
+        $this->assertEquals('Current user not found.', $result->error['message']);
     }
 }
