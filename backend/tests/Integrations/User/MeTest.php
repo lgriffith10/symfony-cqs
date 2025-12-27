@@ -33,7 +33,7 @@ class MeTest extends BaseIntegrationTest
 
         // Assert
         $this->assertTrue($result->success);
-        $this->assertEquals($result->data->email, $user->getEmail());
+        $this->assertEquals($result->data->email, $user->getId());
     }
 
     public function testMeWithoutUserShouldFail(): void

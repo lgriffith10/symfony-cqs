@@ -68,7 +68,7 @@ final class ApiResponse
      */
     public static function forbidden(): self
     {
-        return new self(error: ['message' => 'Forbidden'], success: false, statusCode: Response::HTTP_FORBIDDEN);
+        return new self(error: ['message' => 'Forbidden.'], success: false, statusCode: Response::HTTP_FORBIDDEN);
     }
 
     /**
@@ -76,7 +76,7 @@ final class ApiResponse
      */
     public static function unauthorized(): self
     {
-        return new self(error: ['message' => 'Unauthorized'], success: false, statusCode: Response::HTTP_UNAUTHORIZED);
+        return new self(error: ['message' => 'Unauthorized.'], success: false, statusCode: Response::HTTP_UNAUTHORIZED);
     }
 
     /**
