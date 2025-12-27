@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Attribute\Ignore;
 /**
  * @template T
  */
-class ApiResponse
+final class ApiResponse
 {
     /**
      * @param T|null $data
@@ -63,6 +63,13 @@ class ApiResponse
      */
     public static function forbidden(): self {
         return new self(error: ['message' => 'Forbidden'], success: false, statusCode: Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * @return self<null>
+     */
+    public static function unauthorized(): self {
+        return new self(error: ['message' => 'Unauthorized'], success: false, statusCode: Response::HTTP_UNAUTHORIZED);
     }
 
     /**
