@@ -12,8 +12,7 @@ final class EditTaskCommandBuilder
 
     private function __construct(
         private EditTaskCommand $command
-    )
-    {
+    ) {
     }
 
     public static function create(): self
