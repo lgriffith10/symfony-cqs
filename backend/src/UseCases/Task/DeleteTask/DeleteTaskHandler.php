@@ -32,7 +32,7 @@ class DeleteTaskHandler
             return ApiResponse::notFound("Task with id {$command->id} not found.");
         }
 
-        $canDelete = $this->authorizationChecker->canEdit($command->id);
+        $canDelete = $this->authorizationChecker->canViewAndEdit($command->id);
 
         if (! $canDelete) {
             return ApiResponse::forbidden();

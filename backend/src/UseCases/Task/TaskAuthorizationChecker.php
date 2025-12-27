@@ -15,7 +15,7 @@ final readonly class TaskAuthorizationChecker
     ) {
     }
 
-    public function canEdit(Uuid $taskId): bool
+    public function canViewAndEdit(Uuid $taskId): bool
     {
         $userId = $this->security->getUser()->getUserIdentifier();
         $qb = $this->em->createQueryBuilder();

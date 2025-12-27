@@ -22,6 +22,12 @@ final class TaskController extends AbstractController
     ) {
     }
 
+    #[Route('/{id}', name: 'app_task_show', methods: ['GET'])]
+    public function show(): Response
+    {
+        return new JsonResponse();
+    }
+
     #[Route('/', name: 'app_task_create', methods: ['POST'])]
     public function create(#[MapRequestPayload] CreateTaskCommand $command): Response
     {

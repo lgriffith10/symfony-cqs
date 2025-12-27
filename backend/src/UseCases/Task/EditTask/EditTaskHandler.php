@@ -31,7 +31,7 @@ final readonly class EditTaskHandler
             return ApiResponse::notFound("Task with id {$command->id} not found.");
         }
 
-        $canEditTask = $this->taskAuthorizationChecker->canEdit($command->id);
+        $canEditTask = $this->taskAuthorizationChecker->canViewAndEdit($command->id);
 
         if (! $canEditTask) {
             return ApiResponse::forbidden();
