@@ -4,7 +4,6 @@ namespace App\UseCases\Task\GetTaskById;
 
 use App\Dtos\ApiResponse;
 use App\Entity\Task;
-use App\Repository\TaskRepository;
 use App\UseCases\Task\GetTaskById\Dtos\TaskById;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;

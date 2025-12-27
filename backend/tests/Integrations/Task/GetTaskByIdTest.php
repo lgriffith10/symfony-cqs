@@ -52,6 +52,6 @@ final class GetTaskByIdTest extends BaseIntegrationTest
         $this->assertTrue($result->success);
         $this->assertNotNull($result->data);
 
-//        TODO: finish tests
+        //        TODO: finish tests
     }
 }
