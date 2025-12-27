@@ -22,7 +22,7 @@ class Task implements AuditableInterface
     private ?string $Name = null;
 
     #[ORM\Column(enumType: TaskState::class)]
-    private ?TaskState $State = null;
+    private ?TaskState $State = TaskState::Todo;
 
     #[ORM\Column(length: 255)]
     private ?string $Description = null;

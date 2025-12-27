@@ -14,9 +14,9 @@ use Symfony\Component\Uid\Uuid;
 final class RegisterUserHandler
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher,
-        private Security $security,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly Security $security,
     ) {
     }
 

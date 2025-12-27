@@ -10,6 +10,8 @@ use Symfony\Component\Uid\Uuid;
 
 class UserFixtures extends Fixture
 {
+
+
     public function __construct(private readonly UserPasswordHasherInterface $userPasswordHasher)
     {
     }

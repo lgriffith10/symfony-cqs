@@ -1,11 +1,11 @@
 <?php
 
-namespace Builders\Task;
+namespace App\Tests\Builders\Task;
 
-use Traits\WithFaker;
+use App\Tests\Traits\WithFaker;
 use App\UseCases\Task\CreateTask\CreateTaskCommand;
 
-final class CreateTaskRequestBuilder
+final class CreateTaskCommandBuilder
 {
     use WithFaker;
 

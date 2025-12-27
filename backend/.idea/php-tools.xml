@@ -2,8 +2,8 @@
 <project version="4">
   <component name="Mago">
     <MagoSettings>
-      <MagoConfiguration tool_path="./vendor/bin/mago" />
-      <mago_by_interpreter asDefaultInterpreter="true" deletedFromTheList="true" interpreter_id="bae3c1ec-af4c-47cf-8735-3cc10288360a" tool_path="./vendor/" />
+      <mago_by_interpreter asDefaultInterpreter="true" deletedFromTheList="true" interpreter_id="bae3c1ec-af4c-47cf-8735-3cc10288360a" tool_path="./vendor/bin/mago" />
+      <MagoConfiguration deletedFromTheList="true" tool_path="./vendor/bin/mago" />
     </MagoSettings>
   </component>
 </project>

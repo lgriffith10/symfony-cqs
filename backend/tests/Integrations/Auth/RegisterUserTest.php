@@ -6,7 +6,7 @@ namespace Integrations\Auth;
 
 use App\Dtos\ApiResponse;
 use App\Repository\UserRepository;
-use Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\RegisterUser\RegisterUserCommand;
 
 class RegisterUserTest extends BaseIntegrationTest

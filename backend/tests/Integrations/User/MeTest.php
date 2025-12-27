@@ -4,7 +4,7 @@ namespace Integrations\User;
 
 use App\Dtos\ApiResponse;
 use App\Repository\UserRepository;
-use Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\Me\MeQuery;
 use App\UseCases\User\Me\MeResponse;
 

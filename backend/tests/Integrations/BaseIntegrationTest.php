@@ -1,6 +1,6 @@
 <?php
 
-namespace Integrations;
+namespace App\Tests\Integrations;
 
 use App\Repository\UserRepository;
 use App\UseCases\CommandBus;

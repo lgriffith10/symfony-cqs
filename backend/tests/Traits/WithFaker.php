@@ -1,6 +1,6 @@
 <?php
 
-namespace Traits;
+namespace App\Tests\Traits;
 
 use Faker\Factory;
 use Faker\Generator;
