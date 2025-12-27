@@ -6,6 +6,5 @@ class MeQuery
 {
     function __construct()
     {
-        
     }
 }

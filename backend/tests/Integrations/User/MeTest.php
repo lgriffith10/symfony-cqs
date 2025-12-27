@@ -5,6 +5,8 @@ namespace App\Tests\Integrations\User;
 use App\Repository\UserRepository;
 use App\Tests\Integrations\BaseIntegrationTest;
 use App\UseCases\User\Me\MeQuery;
+use App\Dtos\ApiResponse;
+use App\UseCases\User\Me\MeResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MeTest extends BaseIntegrationTest
@@ -21,25 +23,29 @@ class MeTest extends BaseIntegrationTest
         // Arrange
         $query = new MeQuery();
 
-        $id = $this->userRepository->findOneBy(['email' => 'test@test.com'])->getId();
-        $this->as($id);
+        $user = $this->userRepository->findOneBy(['email' => 'test@test.com']);
+        $this->as($user->getId());
 
         // Act
+        /* @var ApiResponse<MeResponse> $result */
         $result = $this->dispatchQuery($query);
 
         // Assert
-        $this->assertNotNull($result->email);
-        $this->assertEquals('test@test.com', $result->email);
+        $this->assertTrue($result->success);
+        $this->assertEquals($result->data->email, $user->getEmail());
     }
 
     public function testMe_WithoutUser_ShouldFail(): void {
         // Arrange
         $query = new MeQuery();
 
-        // Assert
-        $this->expectException(AccessDeniedException::class);
-
         // Act
-        $this->dispatchQuery($query);
+        /* @var ApiResponse<MeResponse> $result */
+        $result = $this->dispatchQuery($query);
+
+        // Assert
+        $this->assertFalse($result->success);
+        $this->assertEquals(404, $result->statusCode);
+        $this->assertEquals("Current user not found.", $result->error["message"]);
     }
 }

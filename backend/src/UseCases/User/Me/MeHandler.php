@@ -2,6 +2,7 @@
 
 namespace App\UseCases\User\Me;
 
+use App\Dtos\ApiResponse;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -16,14 +17,17 @@ class MeHandler
     {
     }
 
-    public function __invoke(MeQuery $query): MeResponse
+    /**
+     * @return ApiResponse<MeResponse>
+     */
+    public function __invoke(MeQuery $query): ApiResponse
     {
         $user = $this->security->getUser();
 
         if (!$user) {
-            throw new AccessDeniedException();
+            return ApiResponse::notFound("Current user not found.");
         }
 
-        return new MeResponse(email: $user->getUserIdentifier());
+        return ApiResponse::success(new MeResponse(email: $user->getUserIdentifier()));
     }
 }
