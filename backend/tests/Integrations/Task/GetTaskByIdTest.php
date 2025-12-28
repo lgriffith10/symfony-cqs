@@ -4,7 +4,6 @@ namespace Integrations\Task;
 
 use App\Dtos\ApiResponse;
 use App\Entity\Task;
-use App\Entity\User;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\Tests\Builders\Task\EditTaskCommandBuilder;
