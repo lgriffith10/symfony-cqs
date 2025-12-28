@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Dtos\ApiResponse;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -25,6 +26,20 @@ final readonly class AuthenticationSuccessHandler implements AuthenticationSucce
             'user' => $user->getUserIdentifier(),
         ]);
 
-        return new JsonResponse($apiResponse, $apiResponse->statusCode);
+        $response = new JsonResponse($apiResponse, $apiResponse->statusCode);
+
+        $response->headers->setCookie(new Cookie(
+            'symfony-auth',
+            $jwt,
+            strtotime('+1 day'),
+            '/',
+            null,
+            true,
+            true,
+            false,
+            Cookie::SAMESITE_NONE
+        ));
+
+        return $response;
     }
 }

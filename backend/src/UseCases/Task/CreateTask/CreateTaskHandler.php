@@ -27,7 +27,7 @@ final readonly class CreateTaskHandler
     {
         $task = new Task();
 
-        $user = $this->userRepository->findOneBy(['id' => $this->security->getUser()->getUserIdentifier()]);
+        $user = $this->userRepository->findOneBy(['email' => $this->security->getUser()->getUserIdentifier()]);
 
         $task->setId(Uuid::v7());
         $task->setName($command->name);

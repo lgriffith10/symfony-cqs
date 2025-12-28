@@ -22,10 +22,8 @@ describe('AuthStore', () => {
     // Arrange
     const authStore = useAuthStore()
 
-    // Act
-    const result = authStore.isAuthenticated
-
-    // Assert
-    expect(result).toBeFalsy()
+    // Assert && act
+    expect(authStore.isAuthenticated).toBeFalsy()
+    expect(authStore.isChecked).toBeFalsy()
   })
 })

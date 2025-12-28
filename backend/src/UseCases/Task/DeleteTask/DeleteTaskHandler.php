@@ -41,7 +41,7 @@ final readonly class DeleteTaskHandler
 
         // Handler
 
-        $currentUser = $this->userRepository->findOneBy(['id' => $this->security->getUser()->getUserIdentifier()]);
+        $currentUser = $this->userRepository->findOneBy(['email' => $this->security->getUser()->getUserIdentifier()]);
         $task->setDeletedAt(new \DateTimeImmutable());
         $task->setDeletedBy($currentUser);
         $task->setState(TaskState::Deleted);

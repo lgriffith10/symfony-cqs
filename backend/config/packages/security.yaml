@@ -28,7 +28,7 @@ security:
 
             logout:
                 path: api_token_invalidate
-                delete_cookies: [ BEARER ]
+                delete_cookies: [ symfony-auth ]
 
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }

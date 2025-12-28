@@ -4,21 +4,23 @@ lexik_jwt_authentication:
     pass_phrase: '%env(JWT_PASSPHRASE)%'
 
     set_cookies:
-        BEARER:
-            lifetime: null
-            samesite: lax
+        symfony-auth:
+            lifetime: session
+            samesite: none
             path: /
             domain: null
             secure: true
             httpOnly: true
 
     token_extractors:
+        authorization_header:
+            enabled: false
         cookie:
             enabled: true
-            name: BEARER
+            name: symfony-auth
 
 when@dev:
     lexik_jwt_authentication:
         set_cookies:
-            BEARER:
-                secure: false
+            symfony-auth:
+                secure: true
