@@ -17,7 +17,7 @@ final readonly class GetTaskByIdHandler
     }
 
     /**
-     * @return ApiResponse<TaskById>
+     * @return ApiResponse<GetTaskByIdResponse>
      * */
     public function __invoke(GetTaskByIdQuery $query): ApiResponse
     {
@@ -39,6 +39,6 @@ final readonly class GetTaskByIdHandler
             ->getQuery()
             ->getSingleResult();
 
-        return ApiResponse::success($result);
+        return ApiResponse::success(new GetTaskByIdResponse($result));
     }
 }

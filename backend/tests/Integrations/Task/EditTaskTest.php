@@ -62,6 +62,8 @@ final class EditTaskTest extends BaseIntegrationTest
         $this->assertEquals($command->description, $task->getDescription());
         $this->assertEquals($command->expectedAt, $task->getExpectedAt());
         $this->assertEquals($this->user->getId(), $task->getCreatedBy()->getId());
+        $this->assertEquals($this->user->getId(), $task->getUpdatedBy()->getId());
+        $this->assertEqualsWithDelta(new \DateTimeImmutable()->getTimestamp(), $task->getUpdatedAt()->getTimestamp(), 1);
     }
 
     public function testWithNotFoundTaskShouldFail()

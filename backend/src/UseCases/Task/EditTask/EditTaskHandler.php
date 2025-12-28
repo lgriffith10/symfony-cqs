@@ -43,6 +43,9 @@ final readonly class EditTaskHandler
         $task->setDescription($command->description);
         $task->setExpectedAt($command->expectedAt);
 
+        $task->setUpdatedAt(new \DateTimeImmutable());
+        $task->setUpdatedBy($this->security->getUser());
+
         $this->em->persist($task);
         $this->em->flush();
 
