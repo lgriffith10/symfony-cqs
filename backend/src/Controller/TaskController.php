@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Dtos\ApiResponse;
 use App\UseCases\CommandBus;
+use App\UseCases\QueryBus;
 use App\UseCases\Task\CreateTask\CreateTaskCommand;
 use App\UseCases\Task\CreateTask\CreateTaskResponse;
 use App\UseCases\Task\DeleteTask\DeleteTaskCommand;
 use App\UseCases\Task\EditTask\EditTaskCommand;
+use App\UseCases\Task\GetTasks\GetTasksQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +21,17 @@ final class TaskController extends AbstractController
 {
     public function __construct(
         private readonly CommandBus $commandBus,
+        private readonly QueryBus $queryBus,
     ) {
+    }
+
+    #[Route('/', name: 'tasks', methods: ['GET'])]
+    public function list(): Response
+    {
+        $query = new GetTasksQuery();
+        $result = $this->queryBus->query($query);
+
+        return new JsonResponse($result, $result->statusCode);
     }
 
     #[Route('/{id}', name: 'app_task_show', methods: ['GET'])]

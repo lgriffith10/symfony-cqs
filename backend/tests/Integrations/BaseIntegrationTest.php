@@ -2,6 +2,7 @@
 
 namespace App\Tests\Integrations;
 
+use App\Entity\Task;
 use App\Repository\UserRepository;
 use App\UseCases\CommandBus;
 use App\UseCases\QueryBus;

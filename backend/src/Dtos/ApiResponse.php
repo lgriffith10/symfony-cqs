@@ -3,6 +3,7 @@
 namespace App\Dtos;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Attribute\Ignore;
 
 /**
  * @template T
@@ -28,9 +29,10 @@ final class ApiResponse
      *
      * @return self<TSuccess>
      */
+    #[Ignore]
     public static function success(mixed $data = null): self
     {
-        return new self(data: $data);
+        return new self(data: $data, statusCode: Response::HTTP_OK);
     }
 
     /**
@@ -38,6 +40,7 @@ final class ApiResponse
      *
      * @param TSuccess $data
      */
+    #[Ignore]
     public static function created(mixed $data): self
     {
         return new self(data: $data, statusCode: Response::HTTP_CREATED);
@@ -46,6 +49,7 @@ final class ApiResponse
     /**
      * @return self<null>
      */
+    #[Ignore]
     public static function noContent(): self
     {
         return new self(data: null, statusCode: Response::HTTP_NO_CONTENT);
@@ -54,6 +58,7 @@ final class ApiResponse
     /**
      * @return self<null>
      */
+    #[Ignore]
     public static function notFound(string $message): self
     {
         return new self(
@@ -66,6 +71,7 @@ final class ApiResponse
     /**
      * @return self<null>
      */
+    #[Ignore]
     public static function forbidden(): self
     {
         return new self(error: ['message' => 'Forbidden.'], success: false, statusCode: Response::HTTP_FORBIDDEN);
@@ -74,6 +80,7 @@ final class ApiResponse
     /**
      * @return self<null>
      */
+    #[Ignore]
     public static function unauthorized(): self
     {
         return new self(error: ['message' => 'Unauthorized.'], success: false, statusCode: Response::HTTP_UNAUTHORIZED);
@@ -82,6 +89,7 @@ final class ApiResponse
     /**
      * @return self<null>
      */
+    #[Ignore]
     public static function error(string $message, int $code = Response::HTTP_BAD_REQUEST): self
     {
         return new self(

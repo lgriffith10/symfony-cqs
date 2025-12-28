@@ -1,0 +1,16 @@
+meta {
+  name: GetTasks
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{BASE_URL}}/api/tasks/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

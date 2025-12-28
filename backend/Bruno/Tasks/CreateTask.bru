@@ -1,0 +1,31 @@
+meta {
+  name: CreateTask
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/api/tasks/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Task name",
+    "description": "Lorem ipsum dolor est.",
+    "expectedAt": "{{currentDate}}"
+  }
+}
+
+script:pre-request {
+  const now = new Date();
+  const isoDate = now.toISOString();
+  
+  bru.setVar("currentDate", isoDate)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -2,11 +2,11 @@
 framework:
     secret: '%env(APP_SECRET)%'
 
-    # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    serializer:
+        default_context:
+            datetime_format: 'c'
 
-    #esi: true
-    #fragments: true
+    session: true
 
 when@test:
     framework:
