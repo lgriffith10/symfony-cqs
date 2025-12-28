@@ -53,7 +53,7 @@ final class TaskFactory extends PersistentObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Task $task): void {})
+            // ->afterInstantiate(function(GetTasksTask $task): void {})
         ;
     }
 }

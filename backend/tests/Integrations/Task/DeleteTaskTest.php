@@ -5,6 +5,7 @@ namespace Integrations\Task;
 use App\Dtos\ApiResponse;
 use App\Entity\Task;
 use App\Entity\User;
+use App\Enum\TaskState;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\Tests\Factory\TaskFactory;
@@ -57,6 +58,7 @@ class DeleteTaskTest extends BaseIntegrationTest
         $this->assertNotNull($task->getDeletedAt());
         $this->assertEquals($this->user->getId(), $task->getDeletedBy()->getId());
         $this->assertTrue($task->isDeleted());
+        $this->assertEquals($this->task->getState(), TaskState::Deleted);
     }
 
     public function testWithNotFoundTaskShouldFail(): void
@@ -71,7 +73,7 @@ class DeleteTaskTest extends BaseIntegrationTest
         // Assert
         $this->assertFalse($result->success);
         $this->assertEquals(404, $result->statusCode);
-        $this->assertEquals("Task with id {$command->id} not found.", $result->error['message']);
+        $this->assertEquals("GetTasksTask with id {$command->id} not found.", $result->error['message']);
     }
 
     public function testWithInsufficientPermissionsShouldFail(): void

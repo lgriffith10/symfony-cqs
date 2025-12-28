@@ -3,6 +3,7 @@
 namespace App\UseCases\Task\DeleteTask;
 
 use App\Dtos\ApiResponse;
+use App\Enum\TaskState;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\UseCases\Task\TaskAuthorizationChecker;
@@ -29,7 +30,7 @@ final readonly class DeleteTaskHandler
         $task = $this->taskRepository->findOneBy(['id' => $command->id]);
 
         if (null === $task) {
-            return ApiResponse::notFound("Task with id {$command->id} not found.");
+            return ApiResponse::notFound("GetTasksTask with id {$command->id} not found.");
         }
 
         $canDelete = $this->authorizationChecker->canViewAndEdit($command->id);
@@ -43,6 +44,7 @@ final readonly class DeleteTaskHandler
         $currentUser = $this->userRepository->findOneBy(['id' => $this->security->getUser()->getUserIdentifier()]);
         $task->setDeletedAt(new \DateTimeImmutable());
         $task->setDeletedBy($currentUser);
+        $task->setState(TaskState::Deleted);
 
         $this->entityManager->persist($task);
         $this->entityManager->flush();

@@ -79,7 +79,7 @@ final class EditTaskTest extends BaseIntegrationTest
         // Assert
         $this->assertFalse($result->success);
         $this->assertEquals(404, $result->statusCode);
-        $this->assertEquals("Task with id {$command->id} not found.", $result->error['message']);
+        $this->assertEquals("GetTasksTask with id {$command->id} not found.", $result->error['message']);
     }
 
     public function testWithInsufficiantPermissionsShouldFail()
