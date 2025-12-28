@@ -4,7 +4,7 @@ import '@/assets/index.css'
 import 'vue-sonner/style.css'
 import App from './App.vue'
 import router from './plugins/router'
-import AuthLayout from '@/plugins/router/AuthLayout.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 
 const app = createApp(App)

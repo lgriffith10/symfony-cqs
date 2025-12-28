@@ -11,12 +11,18 @@
             placeholder="john@doe.com"
             data-test="email-input"
           />
-          <FieldError :errors="[errors.email]" />
+          <FieldError :errors="[errors.email]" data-test="email-errors" />
         </Field>
         <Field>
           <FieldLabel for="password">Password</FieldLabel>
-          <Input v-model="password" v-bind="passwordAttrs" type="password" placeholder="password" />
-          <FieldError :errors="[errors.password]" />
+          <Input
+            v-model="password"
+            v-bind="passwordAttrs"
+            type="password"
+            placeholder="password"
+            data-test="password-input"
+          />
+          <FieldError :errors="[errors.password]" data-test="password-errors" />
         </Field>
 
         <Field>
