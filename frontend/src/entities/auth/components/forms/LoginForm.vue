@@ -42,8 +42,10 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useLoginMutation } from '@/entities/auth/composables'
 import { toast } from 'vue-sonner'
+import { useAuthStore } from '@/entities/auth/stores/auth-store.ts'
 
 const { mutateAsync } = useLoginMutation()
+const { setIsAuthenticated } = useAuthStore()
 
 const validationSchema = toTypedSchema(
   z.object({
@@ -70,8 +72,10 @@ const onSubmit = handleSubmit(async ({ email, password }) => {
       password,
     })
     toast.success('You were successfully logged in.')
+    setIsAuthenticated(true)
   } catch (error: any) {
     toast.error(error.message)
+    setIsAuthenticated(false)
   }
 })
 </script>

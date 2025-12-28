@@ -9,7 +9,8 @@ import { VueQueryPlugin } from '@tanstack/vue-query'
 
 const app = createApp(App)
 
-app.use(createPinia()).use(router).use(VueQueryPlugin)
+app.use(createPinia())
+app.use(router).use(VueQueryPlugin)
 
 app.component('AuthLayout', AuthLayout)
 
