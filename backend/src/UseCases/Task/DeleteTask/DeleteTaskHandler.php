@@ -11,7 +11,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class DeleteTaskHandler
+final readonly class DeleteTaskHandler
 {
     public function __construct(
         private readonly TaskRepository $taskRepository,
