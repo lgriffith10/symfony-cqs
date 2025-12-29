@@ -19,6 +19,26 @@ services:
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
+  app:
+    build: .
+    volumes:
+      - ./:/app
+      - /app/vendor
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      SERVER_NAME: localhost
+      APP_ENV: dev
+      APP_SECRET: ChangeMe
+      DATABASE_URL: postgresql://admin:password@database:5432/app
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - database
+      - redis
+
+  redis:
+    image: redis:7-alpine
+
   database_test:
     image: postgres:16-alpine
     environment:
@@ -29,6 +49,8 @@ services:
       - "5433:5432"
 
 volumes:
+  caddy_data:
+  caddy_config:
 ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
