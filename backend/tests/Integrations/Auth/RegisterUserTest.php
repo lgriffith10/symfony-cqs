@@ -6,10 +6,10 @@ namespace Integrations\Auth;
 
 use App\Dtos\ApiResponse;
 use App\Repository\UserRepository;
-use App\Tests\Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTestCase;
 use App\UseCases\User\RegisterUser\RegisterUserCommand;
 
-class RegisterUserTest extends BaseIntegrationTest
+class RegisterUserTest extends BaseIntegrationTestCase
 {
     protected UserRepository $userRepository;
 

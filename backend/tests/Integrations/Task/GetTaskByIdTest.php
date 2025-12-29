@@ -8,13 +8,13 @@ use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\Tests\Builders\Task\EditTaskCommandBuilder;
 use App\Tests\Factory\TaskFactory;
-use App\Tests\Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTestCase;
 use App\UseCases\Task\DeleteTask\DeleteTaskCommand;
 use App\UseCases\Task\GetTaskById\GetTaskByIdQuery;
 use App\UseCases\Task\GetTaskById\GetTaskByIdResponse;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class GetTaskByIdTest extends BaseIntegrationTest
+final class GetTaskByIdTest extends BaseIntegrationTestCase
 {
     private Task $task;
 

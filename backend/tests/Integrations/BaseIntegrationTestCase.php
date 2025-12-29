@@ -13,8 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Uid\Uuid;
 
-#[DoesNotPerformAssertions]
-abstract class BaseIntegrationTest extends KernelTestCase
+abstract class BaseIntegrationTestCase extends KernelTestCase
 {
     protected ContainerInterface $container;
     protected EntityManagerInterface $entityManager;

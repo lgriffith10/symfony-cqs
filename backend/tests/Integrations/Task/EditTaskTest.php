@@ -9,10 +9,10 @@ use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\Tests\Builders\Task\EditTaskCommandBuilder;
 use App\Tests\Factory\TaskFactory;
-use App\Tests\Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class EditTaskTest extends BaseIntegrationTest
+final class EditTaskTest extends BaseIntegrationTestCase
 {
     private User $user;
     private Task $task;

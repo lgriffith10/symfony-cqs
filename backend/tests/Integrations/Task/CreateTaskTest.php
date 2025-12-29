@@ -7,10 +7,10 @@ use App\Entity\User;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\Tests\Builders\Task\CreateTaskCommandBuilder;
-use App\Tests\Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTestCase;
 use App\UseCases\Task\CreateTask\CreateTaskResponse;
 
-class CreateTaskTest extends BaseIntegrationTest
+class CreateTaskTest extends BaseIntegrationTestCase
 {
     private User $user;
 

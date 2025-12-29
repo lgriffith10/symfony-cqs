@@ -25,7 +25,7 @@ final class TaskController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'tasks', methods: ['GET'])]
+    #[Route('', name: 'tasks', methods: ['GET'])]
     public function list(): Response
     {
         $query = new GetTasksQuery();
@@ -40,7 +40,7 @@ final class TaskController extends AbstractController
         return new JsonResponse();
     }
 
-    #[Route('/', name: 'app_task_create', methods: ['POST'])]
+    #[Route('', name: 'app_task_create', methods: ['POST'])]
     public function create(#[MapRequestPayload] CreateTaskCommand $command): Response
     {
         /* @var ApiResponse<CreateTaskResponse> $result */

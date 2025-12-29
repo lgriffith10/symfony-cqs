@@ -4,11 +4,11 @@ namespace Integrations\User;
 
 use App\Dtos\ApiResponse;
 use App\Repository\UserRepository;
-use App\Tests\Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTestCase;
 use App\UseCases\User\Me\MeQuery;
 use App\UseCases\User\Me\MeResponse;
 
-class MeTest extends BaseIntegrationTest
+class MeTest extends BaseIntegrationTestCase
 {
     private readonly UserRepository $userRepository;
 
@@ -33,7 +33,7 @@ class MeTest extends BaseIntegrationTest
 
         // Assert
         $this->assertTrue($result->success);
-        $this->assertEquals($result->data->email, $user->getId());
+        $this->assertEquals($result->data->email, $user->getEmail());
     }
 
     public function testMeWithoutUserShouldFail(): void

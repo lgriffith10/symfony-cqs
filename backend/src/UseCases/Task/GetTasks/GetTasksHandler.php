@@ -26,12 +26,8 @@ final readonly class GetTasksHandler
 
         $qb = $this->em->createQueryBuilder();
 
-        $result = $qb->select(
-            \sprintf(
-                'NEW %s(t.id, t.Name, t.State, t.ExpectedAt)',
-                GetTasksTask::class
-            )
-        )
+        $result = $qb
+            ->select('t.id', 't.Name', 't.State', 't.ExpectedAt')
             ->from(Task::class, 't')
             ->where('t.createdBy = :userId')
             ->orderBy('t.createdAt', 'DESC')
@@ -40,6 +36,8 @@ final readonly class GetTasksHandler
             ->getQuery()
             ->getArrayResult();
 
-        return ApiResponse::success(new GetTasksResponse($result));
+        $dto = array_map(fn (array $row) => GetTasksTask::fromArray($row), $result);
+
+        return ApiResponse::success(new GetTasksResponse($dto));
     }
 }

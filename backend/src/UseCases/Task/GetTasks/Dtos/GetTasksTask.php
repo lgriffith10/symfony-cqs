@@ -3,8 +3,6 @@
 namespace App\UseCases\Task\GetTasks\Dtos;
 
 use App\Enum\TaskState;
-use Symfony\Component\Serializer\Attribute\Context;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Uid\Uuid;
 
 final readonly class GetTasksTask
@@ -15,5 +13,24 @@ final readonly class GetTasksTask
         public TaskState $state,
         public \DateTimeImmutable $expectedAt,
     ) {
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            id: $data['id'] instanceof Uuid
+                ? $data['id']
+                : Uuid::fromString($data['id']),
+            name: $data['Name'],
+            state: $data['State'] instanceof TaskState
+                ? $data['State']
+                : TaskState::from($data['state']),
+            expectedAt: $data['ExpectedAt'] instanceof \DateTimeImmutable
+                ? $data['ExpectedAt']
+                : new \DateTimeImmutable($data['expectedAt'])
+        );
     }
 }

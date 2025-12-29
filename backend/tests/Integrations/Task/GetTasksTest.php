@@ -7,12 +7,12 @@ use App\Entity\Task;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Tests\Factory\TaskFactory;
-use App\Tests\Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTestCase;
 use App\UseCases\Task\GetTasks\GetTasksQuery;
 use App\UseCases\Task\GetTasks\GetTasksResponse;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class GetTasksTest extends BaseIntegrationTest
+final class GetTasksTest extends BaseIntegrationTestCase
 {
     private User $user;
     private UserRepository $userRepository;

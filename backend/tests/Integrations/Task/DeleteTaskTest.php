@@ -9,12 +9,12 @@ use App\Enum\TaskState;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\Tests\Factory\TaskFactory;
-use App\Tests\Integrations\BaseIntegrationTest;
+use App\Tests\Integrations\BaseIntegrationTestCase;
 use App\UseCases\Task\DeleteTask\DeleteTaskCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\Uuid;
 
-class DeleteTaskTest extends BaseIntegrationTest
+class DeleteTaskTest extends BaseIntegrationTestCase
 {
     private User $user;
     private Task $task;
