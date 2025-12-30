@@ -56,10 +56,13 @@ COPY migrations migrations/
 # Installer uniquement les dépendances de production
 RUN composer install --prefer-dist --no-dev --no-progress --no-interaction --optimize-autoloader --classmap-authoritative
 
+
 # Créer les répertoires et définir les permissions
 RUN mkdir -p var/cache var/log && \
     chown -R www-data:www-data var && \
     chmod -R 775 var
+
+RUN php bin/console lexik:jwt:generate-keypair --skip-if-exists
 
 # Préchauffer le cache Symfony (utilise APP_ENV depuis .env.prod)
 RUN APP_ENV=prod php bin/console cache:warmup
