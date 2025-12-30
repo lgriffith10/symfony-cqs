@@ -47,7 +47,7 @@ services:
     networks:
       - traefik
     env_file:
-      - ./frontend/.env.prod
+      - ./frontend/.env
     volumes:
       - ./var/log:/app/var/log
     labels:
