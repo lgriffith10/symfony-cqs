@@ -36,9 +36,6 @@ RUN mkdir -p var/cache var/log && \
 ENV APP_ENV=dev
 ENV APP_DEBUG=1
 
-# Pas de worker mode en dev pour le hot-reload automatique
-# Les fichiers PHP seront rechargés à chaque requête
-
 EXPOSE 80 443
 
 # ============================================
@@ -54,6 +51,7 @@ COPY public public/
 COPY src src/
 COPY templates templates/
 COPY translations translations/
+COPY migrations migrations/
 
 # Installer uniquement les dépendances de production
 RUN composer install --prefer-dist --no-dev --no-progress --no-interaction --optimize-autoloader --classmap-authoritative
@@ -63,8 +61,8 @@ RUN mkdir -p var/cache var/log && \
     chown -R www-data:www-data var && \
     chmod -R 775 var
 
-# Préchauffer le cache Symfony
-RUN php bin/console cache:warmup --env=prod
+# Préchauffer le cache Symfony (utilise APP_ENV depuis .env.prod)
+RUN APP_ENV=prod php bin/console cache:warmup
 
 # Configuration pour la production
 ENV APP_ENV=prod

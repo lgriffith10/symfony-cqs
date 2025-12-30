@@ -9,8 +9,8 @@ services:
       - traefik
       - app_network
     env_file:
-      - .env.prod
-      - .env.prod.local
+      - ./backend/env.prod
+      - ./backend/env.prod
     volumes:
       - ./var/log:/app/var/log
     labels:
@@ -46,8 +46,8 @@ services:
     networks:
       - app_network
     env_file:
-      - .env.prod
-      - .env.prod.local
+      - ./backend/env.prod
+      - ./backend/env.prod
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
