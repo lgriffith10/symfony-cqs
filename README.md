@@ -9,6 +9,7 @@ Task management application built as a **learning / experimental project** to pr
 - **Testing: PHPUnit, Vitest**
 - **JavaScript runtime: Bun**
 - **Local infrastructure: Docker Compose (Databases)**
+- **Server infrastructure: Docker Compose + Traefik**
 
 ---
 
