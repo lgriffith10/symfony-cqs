@@ -45,6 +45,7 @@ FROM base AS prod
 
 # Copier uniquement les fichiers nécessaires
 COPY composer.json composer.lock symfony.lock ./
+COPY .env .env.prod ./
 COPY bin bin/
 COPY config config/
 COPY public public/
