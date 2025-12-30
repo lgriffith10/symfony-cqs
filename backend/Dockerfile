@@ -55,18 +55,19 @@ COPY translations translations/
 COPY migrations migrations/
 
 # Installer uniquement les dépendances de production
-RUN composer install --prefer-dist --no-dev --no-progress --no-interaction --optimize-autoloader --classmap-authoritative
-
+RUN composer install --prefer-dist --no-dev --no-progress --no-interaction --optimize-autoloader --classmap-authoritative --no-scripts
 
 # Créer les répertoires et définir les permissions
-RUN mkdir -p var/cache var/log && \
+RUN mkdir -p var/cache var/log config/jwt && \
     chown -R www-data:www-data var && \
     chmod -R 775 var
 
-RUN php bin/console lexik:jwt:generate-keypair --skip-if-exists
+# Générer les clés JWT automatiquement
+RUN APP_ENV=prod php bin/console lexik:jwt:generate-keypair --skip-if-exists
 
-# Préchauffer le cache Symfony (utilise APP_ENV depuis .env.prod)
-RUN APP_ENV=prod php bin/console cache:warmup
+# Préchauffer le cache Symfony avec l'env prod
+RUN APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear --no-warmup
+RUN APP_ENV=prod APP_DEBUG=0 php bin/console cache:warmup
 
 # Configuration pour la production
 ENV APP_ENV=prod
