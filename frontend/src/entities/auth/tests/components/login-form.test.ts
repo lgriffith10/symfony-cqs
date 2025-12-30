@@ -64,7 +64,7 @@ describe('LoginForm', () => {
         password: 'password123',
       })
       expect(toast.success).toHaveBeenCalledWith('You were successfully logged in.')
-      expect(store.setIsAuthenticated).toHaveBeenCalledWith(true)
+      expect(store.setIsAuthenticated).toHaveBeenCalledWith(true, 'test@test.com')
     })
   })
 

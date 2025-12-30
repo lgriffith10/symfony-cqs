@@ -77,7 +77,3 @@ ENV FRANKENPHP_CONFIG="worker ./public/index.php"
 ENV SERVER_NAME=:80
 
 EXPOSE 80 443
-
-# Healthcheck
-HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost/health || exit 1

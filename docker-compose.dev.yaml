@@ -1,6 +1,5 @@
 
 services:
-###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
     environment:
@@ -13,19 +12,25 @@ services:
       timeout: 5s
       retries: 5
       start_period: 60s
+    database:
+    ports:
+      - "5432:5432"
     volumes:
       - database_data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
 
   app:
-    build: .
+    build: 
+      context: ./backend
+      target: dev
     volumes:
-      - ./:/app
+      - ./backend:/app
       - /app/vendor
       - caddy_data:/data
       - caddy_config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+      - "2019:2019"
     environment:
       SERVER_NAME: localhost
       APP_ENV: dev
@@ -38,6 +43,17 @@ services:
 
   redis:
     image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  mailer:
+      image: axllent/mailpit
+      ports:
+        - "1025:1025"
+        - "8025:8025"
+      environment:
+        MP_SMTP_AUTH_ACCEPT_ANY: 1
+        MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
   database_test:
     image: postgres:16-alpine
@@ -51,6 +67,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
-###> doctrine/doctrine-bundle ###
   database_data:
-###< doctrine/doctrine-bundle ###

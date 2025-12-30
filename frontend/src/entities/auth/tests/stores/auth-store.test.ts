@@ -12,10 +12,11 @@ describe('AuthStore', () => {
     const authStore = useAuthStore()
 
     // Act
-    authStore.setIsAuthenticated(true)
+    authStore.setIsAuthenticated(true, 'test@test.com')
 
     // Assert
     expect(authStore.isAuthenticated).toBeTruthy()
+    expect(authStore.email).toBe('test@test.com')
   })
 
   test('should have default value to false', () => {
