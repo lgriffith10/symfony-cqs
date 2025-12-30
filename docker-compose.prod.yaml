@@ -1,7 +1,7 @@
 services:
   app:
     build:
-      context: .
+      context: backend
       target: prod
     container_name: symfony_api
     restart: unless-stopped
